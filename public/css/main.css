@@ -1,0 +1,33 @@
+html, body {
+    height: 100%;
+    width: 100%;
+	font-family: 'Roboto', 'Helvetica', sans-serif;
+}
+
+.spacer {
+    margin-bottom: 50px;
+}
+
+.container-fluid.full-height {
+    height: 100%;
+}
+
+.container-fluid.full-height .row {
+    height: 100%;
+}
+
+.valign-center {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#colorbg {
+    color: #fff;
+}
+
+.panel {
+    color: #000;
+}
