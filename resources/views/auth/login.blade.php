@@ -1,6 +1,5 @@
 @extends('layouts.default')
 @section('content')
-
 <div class="container-fluid full-height">
     <div class="row">
         <div class="col-md-6 valign-center">
@@ -42,9 +41,8 @@
         </div>
     </div>
 </div>
-
 @endsection
 
 @push('endscripts')
-    <script src="{{ asset('js/colorbg.js') }}"></script>
+<script src="{{ asset('js/colorbg.js') }}"></script>
 @endpush

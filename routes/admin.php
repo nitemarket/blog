@@ -13,4 +13,5 @@
 
 Auth::routes();
 
-Route::get('/', 'Admin\HomeController@index')->name('home');
+Route::resource('/', 'Admin\BlogController');
+Route::post('/upload', 'Admin\BlogController@upload')->name('upload');

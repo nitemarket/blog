@@ -4,7 +4,7 @@
 <div class="container-fluid full-height">
     <div class="row">
         <div id="colorbg" class="col-xs-12 valign-center">
-            <div class="panel panel-default">
+            <div class="panel panel-default black">
                 <div class="panel-body">
                     <h1 class="spacer">Reset Password</h1>
                     @if (session('status'))
