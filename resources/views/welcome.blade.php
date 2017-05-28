@@ -31,8 +31,18 @@
                 <h2>Idea is everywhere.</h2>
             </div>
             @endif
+
+            @include ('includes.foot')
         </div>
     </div>
 </div>
 
 @endsection
+
+@push ('endscripts')
+<script>
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+});
+</script>
+@endpush

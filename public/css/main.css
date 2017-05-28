@@ -187,3 +187,9 @@ hr.large {
     text-decoration: none;
     text-transform: uppercase;
 }
+
+.footer {
+    margin: 16px 0;
+    padding-top: 8px;
+    border-top: 1px solid #f1f1f1;
+}
