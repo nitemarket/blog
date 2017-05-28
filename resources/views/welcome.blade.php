@@ -9,15 +9,17 @@
     <div class="row">
         <div class="col-sm-8 col-sm-offset-2">
             <section class="quill-render spacer">
-                <div class="spacer"></div>
+                <div class="large-spacer"></div>
                 @foreach ($blogs as $blog)
+                <div class="spacer">
+                    {!! $blog->content !!}
+                </div>
+                <div class="text-muted">
+                    By <span class="text-primary">{{ $blog->user->name }}</span>
+                </div>
                 <div class="text-muted">
                     Published {{ Carbon::parse($blog->published_at)->diffForHumans() }}
                 </div>
-                <div class="text-muted mb30">
-                    By <span class="text-primary">{{ $blog->user->name }}</span>
-                </div>
-                {!! $blog->content !!}
                 @if ($loop->remaining > 0)
                 <hr class="large" />
                 @endif
