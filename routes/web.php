@@ -12,5 +12,13 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    $blogs = App\Blog::where("published", 1)->orderBy('published_at', 'desc')->get();
+    foreach($blogs as $index => $blog){
+        $quill = new QuillRender($blog->content);
+        $blogs[$index]->content = $quill->render();
+    }
+
+    return view('welcome', [
+        'blogs' => $blogs
+    ]);
 });

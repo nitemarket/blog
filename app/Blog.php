@@ -9,7 +9,9 @@ class Blog extends Moloquent
 {
     use SoftDeletes;
 
-    protected $dates = ['deleted_at'];
+    protected $dates = ['deleted_at', 'published_at'];
+
+    protected $primaryKey = '_id';
 
     protected $connection = 'mongodb';
 

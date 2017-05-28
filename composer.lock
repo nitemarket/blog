@@ -4,8 +4,56 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "bcd7ce4c264d50e7ca9d68614f6e0215",
+    "content-hash": "108b20429fa068fa5d9f91ff6883e529",
     "packages": [
+        {
+            "name": "deanblackborough/php-quill-renderer",
+            "version": "v0.80.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/deanblackborough/php-quill-renderer.git",
+                "reference": "10ffb9d2bfa3866a4855e9cefd15a692c967eed4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/deanblackborough/php-quill-renderer/zipball/10ffb9d2bfa3866a4855e9cefd15a692c967eed4",
+                "reference": "10ffb9d2bfa3866a4855e9cefd15a692c967eed4",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^5.6 || ^7.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^6"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "DBlackborough\\Quill\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Dean Blackborough",
+                    "email": "dean@g3d-development.com"
+                }
+            ],
+            "description": "Render quill insert deltas to HTML and soon markdown",
+            "homepage": "https://github.com/deanblackborough/php-quill-renderer",
+            "keywords": [
+                "delta",
+                "html",
+                "parse",
+                "quill",
+                "quilljs",
+                "renderer"
+            ],
+            "time": "2017-04-25T18:34:17+00:00"
+        },
         {
             "name": "dnoegel/php-xdg-base-dir",
             "version": "0.1",

@@ -11,7 +11,14 @@
 |
 */
 
+Route::get('/', function(){
+    return redirect()->route('blogs.index');
+})->name('admin');
+
 Auth::routes();
 
-Route::resource('/', 'Admin\BlogController');
-Route::post('/upload', 'Admin\BlogController@upload')->name('upload');
+Route::post('blogs/upload', 'Admin\BlogController@upload')->name('upload');
+Route::post('blogs/publish', 'Admin\BlogController@publish')->name('publish');
+Route::resource('blogs', 'Admin\BlogController', ['except' => [
+    'show'
+]]);

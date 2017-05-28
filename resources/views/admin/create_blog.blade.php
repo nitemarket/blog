@@ -19,7 +19,6 @@
 @endsection
 
 @push('scripts')
-<meta name="csrf-token" content="{{ csrf_token() }}">
 <link rel="stylesheet" href="//cdn.quilljs.com/1.2.4/quill.snow.css">
 <link rel="stylesheet" href="{{ asset('css/plugins/highlight/androidstudio.css') }}">
 @endpush
@@ -79,6 +78,10 @@ var quill = new Quill('#editor-container', {
     imageHandler: imageHandler
 });
 
+@isset ($blog)
+quill.setContents({!! $blog->content !!});
+@endisset
+
 // Store accumulated changes
 var change = new Delta();
 var saveTimeout;
@@ -93,7 +96,7 @@ window.onbeforeunload = function() {
 $(document).ready(function(){
     var title = $('#editor-container').find('h1').first();
     var saveStatus = $('#saveStatus');
-    var blogId = 0;
+    var blogId = '<?php echo (isset($blog) && $blog->_id) ? $blog->_id : 0; ?>';
     var self = $(this);
 
     quill.on('text-change', function(delta) {
@@ -104,7 +107,7 @@ $(document).ready(function(){
             saveTimeout = setTimeout(function() {
                 $.ajax({
                     type: "POST",
-                    url: '{{ route('store') }}',
+                    url: '{{ route('blogs.store') }}',
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     },
@@ -116,6 +119,7 @@ $(document).ready(function(){
                     dataType: 'json',
                     success: function(response) {
                         blogId = response.id;
+                        $('#publishActionBtn').popover('destroy');
                         $.notify("Saved successfully.", {
                             className: 'success',
                             globalPosition: 'bottom left',
@@ -125,6 +129,33 @@ $(document).ready(function(){
             }, 2000);
 
             change = new Delta();
+        }
+    });
+
+    $('html').on('click', '#publishActionBtn', function(e) {
+        e.preventDefault();
+        var self= $(this);
+
+        if(blogId <= 0) {
+            self.popover('toggle');
+        } else {
+            var toPublish = $(this).data('publish');
+            $.ajax({
+                type: "POST",
+                url: '{{ route('publish') }}',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                data: {
+                    published: toPublish,
+                    id: blogId,
+                },
+                dataType: 'json',
+                success: function(response) {
+                    var published = response.published;
+                    self.data('publish', published <= 0 ? 1 : 0).text(published <= 0 ? "Publish" : "Unpublish");
+                }
+            });
         }
     });
 });

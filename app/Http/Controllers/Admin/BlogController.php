@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Route;
 use Auth;
 use Storage;
+use Carbon;
 
 class BlogController extends Controller
 {
@@ -23,7 +24,11 @@ class BlogController extends Controller
      */
     public function index()
     {
-        return view('Admin.home');
+        $blogs = Auth::user()->blogs()->orderBy('updated_at', 'desc')->get();
+
+        return view('Admin.home', [
+            'blogs' => $blogs
+        ]);
     }
 
     /**
@@ -50,7 +55,7 @@ class BlogController extends Controller
         );
 
         return response()->json([
-            'id' => $blog->id,
+            'id' => $blog->_id,
         ]);
     }
 
@@ -62,7 +67,9 @@ class BlogController extends Controller
      */
     public function show(Blog $blog)
     {
-        //
+        return view('Admin.create_blog', [
+            'blog' => $blog
+        ]);
     }
 
     /**
@@ -73,7 +80,9 @@ class BlogController extends Controller
      */
     public function edit(Blog $blog)
     {
-        //
+        return view('Admin.create_blog', [
+            'blog' => $blog
+        ]);
     }
 
     /**
@@ -96,7 +105,8 @@ class BlogController extends Controller
      */
     public function destroy(Blog $blog)
     {
-        //
+        $blog->delete();
+        return redirect()->route('blogs.index');
     }
 
     public function upload(Request $request)
@@ -114,6 +124,19 @@ class BlogController extends Controller
             'data' => [
                 'link' => asset("storage/" . basename($path)),
             ]
+        ]);
+    }
+
+    public function publish(Request $request)
+    {
+        $blog = Blog::find($request->input('id'));
+        $toPublish = $request->input('published');
+        $blog->published = (int) $toPublish;
+        $blog->published_at = $toPublish ? Carbon::now() : "";
+        $blog->save();
+
+        return response()->json([
+            'published' => (int) $toPublish,
         ]);
     }
 }

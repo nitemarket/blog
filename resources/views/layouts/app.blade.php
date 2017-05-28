@@ -18,14 +18,16 @@
                     </button>
 
                     <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/') }}">
+                    <a class="navbar-brand" href="{{ route('blogs.index') }}">
                         {{ config('app.name', 'Laravel') }}
                     </a>
                 </div>
 
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
-                    <!-- <ul class="nav navbar-nav"></ul> -->
+                    <ul class="nav navbar-nav">
+                        <li><a href="{{ url('/') }}">Frontend</a></li>
+                    </ul>
 
                     <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-right">
@@ -34,11 +36,17 @@
                             <li><a href="{{ route('login') }}">Login</a></li>
                             <li><a href="{{ route('register') }}">Register</a></li>
                         @else
-                            <li>
-                                <a href="{{ route('create') }}" class="btn btn-link">
-                                    Write a story
+                            <div class="navbar-form navbar-left">
+                                @if (in_array(Route::currentRouteName(), array('blogs.create', 'blogs.edit')))
+                                <a href="#" tabindex="0" role="button" id="publishActionBtn" class="btn btn-success" data-toggle="popover" data-placement="bottom" data-content="Publishing is available when you start writing." data-trigger="focus" data-publish="<?php echo (!isset($blog) || !$blog->published) ? "1" : "0" ?>">
+                                    <?php echo (!isset($blog) || !$blog->published) ? "Publish" : "Unpublish" ?>
                                 </a>
-                            </li>
+                                @else
+                                <a href="{{ route('blogs.create') }}" class="btn btn-primary">
+                                    New story
+                                </a>
+                                @endif
+                            </div>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                     {{ Auth::user()->name }} <span class="caret"></span>

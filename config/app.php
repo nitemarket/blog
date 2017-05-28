@@ -228,6 +228,8 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Moloquent' => Jenssegers\Mongodb\Eloquent\Model::class,
+        'Carbon' => Carbon\carbon::class,
+        'QuillRender' => DBlackborough\Quill\Render::class,
     ],
 
 ];
