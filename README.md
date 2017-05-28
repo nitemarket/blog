@@ -2,7 +2,7 @@
 
 A blog demo that is built in Laravel.
 
-#### Features
+### Features
 The sections where demostration includes:
   - User authentication (built-in)
   - MySQL integration (storing user info)
@@ -11,7 +11,7 @@ The sections where demostration includes:
   - Delta parser and renderer
   - Twitter Bootstrap
 
-#### Installations
+### Installations
 Environment requirements:
   * Laravel 5.4
   * MongoDB 3.2
@@ -37,14 +37,14 @@ MONGO_USERNAME=jack
 MONGO_PASSWORD=qwe123
 ```
 
-#### Future
+### Future
   - Realtime collaboration
   - Improvement on blog html rendering
   - User interactions (like, keep, follow, tag, highlight)
   - Data analysis (reading time, reader data analysis)
   - Trending topic prediction
 
-#### License
+### License
 MIT
 
 Free Software, Hell Yeah!
