@@ -118,13 +118,22 @@ class BlogController extends Controller
             }
         }
 
-        return response()->json([
-            'status' => 200,
-            'success' => 1,
-            'data' => [
-                'link' => asset("storage/" . basename($path)),
-            ]
-        ]);
+        if(isset($path) && $path){
+            $json = [
+                'status' => 200,
+                'success' => 1,
+                'data' => [
+                    'link' => asset("storage/" . basename($path)),
+                ]
+            ];
+        }
+        else {
+            $json = [
+                'status' => 400,
+                'success' => 0,
+            ];
+        }
+        return response()->json($json);
     }
 
     public function publish(Request $request)
@@ -138,5 +147,10 @@ class BlogController extends Controller
         return response()->json([
             'published' => (int) $toPublish,
         ]);
+    }
+
+    public function mass_upload()
+    {
+        return view('Admin.mass_upload');
     }
 }

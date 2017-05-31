@@ -19,6 +19,8 @@ Auth::routes();
 
 Route::post('blogs/upload', 'Admin\BlogController@upload')->name('upload');
 Route::post('blogs/publish', 'Admin\BlogController@publish')->name('publish');
+Route::get('/blogs/mass_upload', 'Admin\BlogController@mass_upload')->name('mass_upload');
+
 Route::resource('blogs', 'Admin\BlogController', ['except' => [
     'show'
 ]]);
